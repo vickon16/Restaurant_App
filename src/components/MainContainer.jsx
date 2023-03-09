@@ -1,12 +1,14 @@
-import React from "react";
-import HomeContainer from "./HomeContainer";
+import {HomeSection, CategorySection, MenuSection} from "./index";
 
 const MainContainer = () => {
+  
   return (
     <>
-      <HomeContainer />
+      <HomeSection />
+      <CategorySection />
+      <MenuSection />
     </>
-  )
+  );
 }
 
 export default MainContainer;

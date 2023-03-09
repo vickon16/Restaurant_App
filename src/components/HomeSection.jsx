@@ -4,7 +4,7 @@ import {heroData} from "../data";
 
 const HomeContainer = () => {
   return (
-    <section id="home" className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
+    <section id="home" className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full mb-12">
       <article className="py-2 px-1 flex-1 flex flex-col items-start justify-center gap-6">
         {/* Buttons */}
         <div className="flex items-center gap-1 justify-center bg-orange-200 p-2 rounded-full">
@@ -26,7 +26,7 @@ const HomeContainer = () => {
             Your City
           </span>
         </p>
-        <p className="text-base text-textColor text-center md:text-left md:w-[85%]">
+        <p className="text-base text-textColor text-center sm:text-left md:w-[85%]">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore,
           adipisci ipsa labore explicabo molestias dicta optio voluptatem sed
           autem incidunt? Lorem ipsum dolor sit amet consectetur adipisicing
@@ -38,26 +38,31 @@ const HomeContainer = () => {
       </article>
 
       {/* Hero section */}
-      <article className="py-2 flex-1 flex items-center relative">
+      <article className="py-2 h-full flex-1 flex items-center relative overflow-y-auto">
         <img
           src="images/heroBg.png"
-          className="ml-auto w-full h-420 md:w-auto md:h-650"
+          className="ml-auto w-full h-420 md:w-auto md:h-685"
           alt="hero-img"
         />
 
-        <div className="w-full h-full absolute flex items-center justify-center gap-6 flex-wrap max-w-[550px] border-2">
+        <div className="w-full h-auto top-10 absolute flex items-center justify-center gap-4 p-4 flex-wrap md:max-w-[550px]">
           {/* Card */}
-          {heroData && heroData.map((item) => (
-              <div key={item.id} className="w-190 rounded-2xl p-3 bg-cardOverlay backdrop-blur-md flex flex-col items-center justify-center gap-1">
-                <img src={item.img} className="-mt-20" alt={item.name} />
-                <p className="text-lg font-semibold text-textColor">
+          {heroData &&
+            heroData.map((item) => (
+              <div
+                key={item.id}
+                className="w-30 sm:w-40 md:w-150 lg:w-190 rounded-2xl p-2 bg-cardOverlay backdrop-blur-md flex flex-col items-center justify-center gap-1"
+              >
+                <img src={item.img} className="w-20 lg:w-40" alt={item.name} />
+                <p className="text-sm md:text-lg font-semibold text-textColor">
                   {item.name}
                 </p>
                 <p className="text-xs font-semibold text-lighttextGray">
                   {item.desc}
                 </p>
-                <p className="text-md text-headingColor font-semibold">
-                  <span className="text-xs text-green-600">$</span>{item.price}
+                <p className="text-sm md:text-md text-headingColor font-semibold">
+                  <span className="text-xs text-green-600">$</span>
+                  {item.price}
                 </p>
               </div>
             ))}

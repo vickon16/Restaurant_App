@@ -28,3 +28,41 @@ export const heroData = [
     img: "images/fi1.png",
   },
 ];
+
+export const categories = [
+  {
+    id: 1,
+    name: "Chicken",
+    urlName: "chicken",
+  },
+  {
+    id: 2,
+    name: "Fruits",
+    urlName: "fruits",
+  },
+  {
+    id: 3,
+    name: "Icecreams",
+    urlName: "icecreams",
+  },
+  {
+    id: 4,
+    name: "Fish",
+    urlName: "fish",
+  },
+  {
+    id: 5,
+    name: "Soft Drinks",
+    urlName: "softdrinks",
+  },
+  {
+    id: 6,
+    name: "Curry",
+    urlName: "curry",
+  },
+  {
+    id: 7,
+    name: "Rice",
+    urlName: "rice",
+  },
+];

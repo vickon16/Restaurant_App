@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { collection, getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
@@ -22,7 +22,8 @@ const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 
 const auth = getAuth(app);
-const firestoreDB = getFirestore(app);
+const db = getFirestore(app);
 const storage = getStorage(app);
+const collectionRef = collection(db, "foodItems");
 
-export {app, auth, provider, firestoreDB, storage};
+export {app, auth, provider, db, storage, collectionRef};
