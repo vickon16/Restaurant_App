@@ -8,7 +8,7 @@ import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 
 const Header = () => {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
   const [isMenu, setIsMenu] = useState(false);
 
   // multiple styles
@@ -51,7 +51,7 @@ const Header = () => {
           <p className="text-headingColor text-xl font-bold">Food Place</p>
         </Link>
 
-        <article className="flex item-center gap-8">
+        <article className="flex item-center gap-6">
           {/* LISTs for Desktop */}
           <motion.ul
             initial={{ opacity: 0, x: 200 }}
@@ -60,22 +60,33 @@ const Header = () => {
             className="hidden md:flex items-center gap-8"
           >
             <Link to="/">
-              <li className={linkStyle} onClick={() => setIsMenu(false)}>Home</li>
+              <li className={linkStyle} onClick={() => setIsMenu(false)}>
+                Home
+              </li>
             </Link>
-            <li className={linkStyle} onClick={() => setIsMenu(false)}>Menu</li>
-            <li className={linkStyle} onClick={() => setIsMenu(false)}>About Us</li>
-            <li className={linkStyle} onClick={() => setIsMenu(false)}>Services</li>
+            <li className={linkStyle} onClick={() => setIsMenu(false)}>
+              Menu
+            </li>
+            <li className={linkStyle} onClick={() => setIsMenu(false)}>
+              About Us
+            </li>
+            <li className={linkStyle} onClick={() => setIsMenu(false)}>
+              Services
+            </li>
           </motion.ul>
 
-          {/* CART */}
+          {/* CART Icon */}
           <motion.div
             whileTap={{ scale: 0.8 }}
             className="relative cursor-pointer flex items-center "
+            onClick={() => dispatch({type : actionType.SET_CART_SHOW , cartShow : !cartShow})}
           >
             <MdShoppingBasket className="text-textColor text-2xl" />
-            <div className="w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center absolute -top-1 -right-2">
-              <p className="text-xs text-white font-semibold">2</p>
-            </div>
+            {cartItems && cartItems.length > 0 && (
+              <div className="w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center absolute -top-1 -right-2">
+                <p className="text-xs text-white font-semibold">{cartItems.length}</p>
+              </div>
+            )}
           </motion.div>
           {/* Avatar */}
           <motion.div
@@ -97,23 +108,49 @@ const Header = () => {
               >
                 {user?.email === "nkachukwuvictor2016@gmail.com" && (
                   <li>
-                    <Link to="/create-item" className={dropdownStyle}>
-                      New Item <MdAdd />
+                    <Link
+                      to="/create-item"
+                      className={dropdownStyle}
+                      onClick={() => setIsMenu(false)}
+                    >New Item <MdAdd />
                     </Link>
                   </li>
                 )}
 
                 {/* mobile lists */}
                 <li className="md:hidden flex flex-col gap-1">
-                  <Link to="/" className={dropdownStyle} onClick={() => setIsMenu(false)}>Menu</Link>
-                  <Link to="/" className={dropdownStyle} onClick={() => setIsMenu(false)}>About Us</Link>
-                  <Link to="/" className={dropdownStyle} onClick={() => setIsMenu(false)}>Home</Link>
-                  <Link to="/" className={dropdownStyle} onClick={() => setIsMenu(false)}>Services</Link>
+                  <Link
+                    to="/"
+                    className={dropdownStyle}
+                    onClick={() => setIsMenu(false)}
+                  >Menu
+                  </Link>
+                  <Link
+                    to="/"
+                    className={dropdownStyle}
+                    onClick={() => setIsMenu(false)}
+                  >About Us
+                  </Link>
+                  <Link
+                    to="/"
+                    className={dropdownStyle}
+                    onClick={() => setIsMenu(false)}
+                  >Home
+                  </Link>
+                  <Link
+                    to="/"
+                    className={dropdownStyle}
+                    onClick={() => setIsMenu(false)}
+                  >Services
+                  </Link>
                 </li>
 
                 <li>
-                  <Link to="/create-item" onClick={logout} className={dropdownStyle}>
-                    Logout <MdLogout />
+                  <Link
+                    to="/create-item"
+                    onClick={logout}
+                    className={dropdownStyle}
+                  >Logout <MdLogout />
                   </Link>
                 </li>
               </motion.ul>

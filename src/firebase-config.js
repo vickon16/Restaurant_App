@@ -24,6 +24,7 @@ const provider = new GoogleAuthProvider();
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
-const collectionRef = collection(db, "foodItems");
+const collectionFoodRef = collection(db, "foodItems");
+const collectionCartRef = collection(db, "cartItems");
 
-export {app, auth, provider, db, storage, collectionRef};
+export {app, auth, provider, db, storage, collectionFoodRef, collectionCartRef};

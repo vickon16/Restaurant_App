@@ -1,14 +1,33 @@
-import {motion} from "framer-motion"
-import {MdFastfood, MdCloudUpload, MdDelete, MdFoodBank, MdAttachMoney} from "react-icons/md";
-import {categories} from "../data";
-import {Loader} from "../components";
-import useStorageHook from '../useStorageHook';
+import { motion } from "framer-motion";
+import {
+  MdFastfood,
+  MdCloudUpload,
+  MdDelete,
+  MdFoodBank,
+  MdAttachMoney,
+} from "react-icons/md";
+import { categories } from "../data";
+import { Loader } from "../components";
+import useStorageHook from "../hooks/useStorageHook";
 
-const articleStyle = "w-full py-2 border-b border-gray-300 flex items-center gap-1";
-const inputClassname = "w-full text-lg bg-transparent py-1 px-3 outline-none border-none placeholder:text-gray-400 text-textColor"
+const articleStyle =
+  "w-full py-2 border-b border-gray-300 flex items-center gap-1";
+const inputClassname =
+  "w-full text-lg bg-transparent py-1 px-3 outline-none border-none placeholder:text-gray-400 text-textColor";
 
 const CreateContainer = () => {
-  const {items, handleInputs, alertStatus, deleteImage, fields, imageURL, isLoading, msg, uploadImage, saveDetails} = useStorageHook();
+  const {
+    items,
+    handleInputs,
+    alertStatus,
+    deleteImage,
+    fields,
+    imageURL,
+    isLoading,
+    msg,
+    uploadImage,
+    saveDetails,
+  } = useStorageHook();
 
   return (
     <section className="w-full h-auto min-h-screen flex items-start justify-center">
@@ -154,6 +173,6 @@ const CreateContainer = () => {
       </div>
     </section>
   );
-}
+};
 
-export default CreateContainer
+export default CreateContainer;

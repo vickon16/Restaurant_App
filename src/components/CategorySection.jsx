@@ -7,7 +7,7 @@ import { useStateValue } from "../context/StateProvider";
 const buttonStyles = "w-8 h-8 rounded-lg bg-orange-300 hover:bg-orange-500 cursor-pointer hover:shadow-lg flex items-center justify-center"
 
 const CategorySection = () => {
-  const [{user, foodItems }] = useStateValue();
+  const [{user, foodItems }, dispatch] = useStateValue();
   const rowContainer = useRef();
 
   const scroll = (scrollOffset) => {
@@ -41,6 +41,7 @@ const CategorySection = () => {
       <RowContainer
         rowContainer={rowContainer}
         flag={true}
+        dispatch={dispatch}
         data={foodItems?.filter((n) => n.category === "fruits")}
         admin={user?.email === "nkachukwuvictor2016@gmail.com"}
       />

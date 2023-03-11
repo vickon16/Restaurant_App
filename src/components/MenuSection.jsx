@@ -6,7 +6,7 @@ import {RowContainer} from "./index";
 import { useStateValue } from '../context/StateProvider';
 
 const MenuSection = () => {
-  const [{user, foodItems }] = useStateValue();
+  const [{user, foodItems }, dispatch] = useStateValue();
   const [filter, setFilter] = useState("chicken");
 
   return (
@@ -63,6 +63,7 @@ const MenuSection = () => {
         <div className="w-full ">
           <RowContainer
             flag={false}
+            dispatch={dispatch}
             data={foodItems?.filter((n) => n.category === filter)}
             admin={user?.email === "nkachukwuvictor2016@gmail.com"}
           />

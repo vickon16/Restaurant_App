@@ -1,19 +1,26 @@
 import { deleteDoc, doc, setDoc } from "firebase/firestore"
-import { collectionRef, db } from "./firebase-config"
-
+import { collectionFoodRef, collectionCartRef} from "./firebase-config";
+import {actionType} from "./context/reducer";
 
 // Saving new Item
-export const saveItem = async (data) => {
-  const docRef = doc(db, "foodItems", `${data.id}`);
+export const saveFoodItem = async (data) => {
+  const docRef = doc(collectionFoodRef, `${data.id}`);
   await setDoc(docRef, data, { merge : true});
 }
 
-export const deleteItem = (id) => {
-  const docRef = doc(collectionRef, id);
-  
-  deleteDoc(docRef).then(() => {
-    console.log("deleted successfully");
-  }).catch(err => {
-    console.log(err)
-  })
+export const saveCartItem = async (data, dispatch) => {
+   const docRef = doc(collectionCartRef, `${data.id}`);
+   await setDoc(docRef, data, { merge: true });
+   dispatch({type : actionType.SET_CART_SHOW, cartShow : true});
+}
+
+export const deleteCartItem = async (id, dispatch) => {
+  const docRef = doc(collectionCartRef, id);
+  await deleteDoc(docRef)
+  dispatch({ type: actionType.CALCULATE_TOTAL });
+};
+
+export const deleteFoodItem = async (id) => {
+  const docRef = doc(collectionFoodRef, id);
+  await deleteDoc(docRef);
 }

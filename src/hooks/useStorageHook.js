@@ -1,10 +1,21 @@
-import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { useState } from "react";
-import { storage } from "./firebase-config";
-import {saveItem} from "./firebaseFunctions"
-import {useNavigate} from "react-router-dom";
+import { storage } from "../firebase-config";
+import { saveFoodItem } from "../firebaseFunctions";
+import { useNavigate } from "react-router-dom";
 
-const itemsList = { title: "", calories: "", price: "", category: "", imageURL : "" };
+const itemsList = {
+  title: "",
+  calories: "",
+  price: "",
+  category: "",
+  imageURL: "",
+};
 
 const useStorageHook = () => {
   const [items, setItems] = useState(itemsList);
@@ -23,14 +34,15 @@ const useStorageHook = () => {
       setFields(false);
       setIsLoading(false);
     }, 4000);
-  }
+  };
 
   const handleInputs = (e) => {
-    const {name, value} = e.target;
-    setItems(prev => ({
-      ...prev, [name] : value
-    }))
-  }
+    const { name, value } = e.target;
+    setItems((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const uploadImage = (e) => {
     setIsLoading(true);
@@ -53,7 +65,7 @@ const useStorageHook = () => {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setItems(prev => ({...prev, imageURL : downloadURL}));
+            setItems((prev) => ({ ...prev, imageURL: downloadURL }));
             setIsLoading(false);
             errSuccessHandle("Image uploaded successfully!!!.", "success");
           });
@@ -66,32 +78,33 @@ const useStorageHook = () => {
   const deleteImage = () => {
     setIsLoading(true);
     const deleteRef = ref(storage, imageURL);
-    deleteObject(deleteRef)
-    .then(() => {
+    deleteObject(deleteRef).then(() => {
       setItems((prev) => ({ ...prev, imageURL: null }));
       setIsLoading(false);
       errSuccessHandle("Image deleted successfully!!!.", "success");
-    })
+    });
   };
 
   // save details
   const saveDetails = () => {
     setIsLoading(true);
     try {
-      const {title, price, calories, category} = items;
+      const { title, price, calories, category } = items;
       if (!title || !price || !calories || !category || !imageURL) {
         errSuccessHandle("Required fields cannot be empty", "danger");
       } else {
         const data = {
-          id : `${Date.now()}`,
+          id: `${Date.now()}`,
           imageURL,
-          quantity : 1,
-          price : Number(price),
-          title, category, calories
-        }
+          quantity: 1,
+          price: Number(price),
+          title,
+          category,
+          calories,
+        };
         setItems(itemsList);
-        setIsLoading(false)
-        saveItem(data);
+        setIsLoading(false);
+        saveFoodItem(data);
         setFields(true);
         setMsg("Data Uploaded Successfully!!!");
         setAlertStatus("Success");
@@ -107,9 +120,18 @@ const useStorageHook = () => {
     }
   };
 
-  return {items, handleInputs, fields, alertStatus, msg, isLoading, imageURL, uploadImage, deleteImage, saveDetails}
-
-}
+  return {
+    items,
+    handleInputs,
+    fields,
+    alertStatus,
+    msg,
+    isLoading,
+    imageURL,
+    uploadImage,
+    deleteImage,
+    saveDetails,
+  };
+};
 
 export default useStorageHook;
-
