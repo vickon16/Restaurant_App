@@ -7,8 +7,8 @@ import CartItem from "./CartItem";
 import { useState } from "react";
 
 const CartContainer = () => {
-  const [deliveryFee] = useState(3.00);
-  const [{cartItems, cartTotal}, dispatch] = useStateValue();
+  const [{user, cartItems, cartTotal}, dispatch] = useStateValue();
+  const [deliveryFee] = useState(3);
 
   return (
     <motion.section
@@ -56,7 +56,7 @@ const CartContainer = () => {
               </article>
               <article className="w-full flex items-center justify-between">
                 <p className="text-gray-400 text-base">Delivery</p>
-                <p className="text-gray-400 text-base">$ {deliveryFee.toFixed(2)}</p>
+                <p className="text-gray-400 text-base">$ {deliveryFee}</p>
               </article>
               <p className="w-full border-b border-gray-600 my-2"></p>
               <div className="w-full flex items-center justify-between">
@@ -65,12 +65,14 @@ const CartContainer = () => {
               </div>
 
               {/* total button */}
-              <motion.button
-                whileTap={{ scale: 0.8 }}
-                className="w-full p-2 rounded-full bg-gradient-to-br from-orange-300 to-orange-600 text-gray-50 text-base my-2 hover:shadow-lg"
-              >
-                Check Out
-              </motion.button>
+              {user && (
+                <motion.button
+                  whileTap={{ scale: 0.8 }}
+                  className="w-full p-2 rounded-full bg-gradient-to-br from-orange-300 to-orange-600 text-gray-50 text-base my-2 hover:shadow-lg"
+                >
+                  Check Out
+                </motion.button>
+              )}
             </div>
           </>
         ) : (

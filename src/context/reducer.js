@@ -43,9 +43,10 @@ export const reducer = (state, action) => {
         )};
     case actionType.CALCULATE_TOTAL: 
         const totalPrice = state.cartItems.reduce((total, current) => {
-          return total + (current.price * current.quantity)
+          const totalAcummulated = total + (current.price * current.quantity);
+          return totalAcummulated;
         }, 0)
-        return { ...state, cartTotal: Number(totalPrice).toFixed(2) };
+        return { ...state, cartTotal: totalPrice };
     default:
       return state;
   }
