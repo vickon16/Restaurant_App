@@ -15,21 +15,13 @@ const Header = () => {
   const linkStyle = "text-base text-textColor hover:text-headingColor cursor-pointer duration-100 transition-all ease-in-out"
   const dropdownStyle = "px-2 py-2 flex items-center gap-2 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
 
-
   const Login = () => {
     if (!user) {
       signInWithPopup(auth, provider)
         .then((resp) => {
-          const {
-            user: { refreshToken, providerData },
-          } = resp;
-          console.log(refreshToken);
-          dispatch({
-            type: actionType.SET_USER,
-            user: providerData[0],
-          });
-        })
-        .catch((err) => console.log(err));
+          const { user: { providerData }} = resp;
+          dispatch({ type: actionType.SET_USER, user: providerData[0]});
+        }).catch((err) => console.log(err));
     } else {
       setIsMenu(prev => !prev);
     }

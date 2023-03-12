@@ -14,11 +14,11 @@ const CartItem = ({id, imageURL, title, price, quantity}) => {
 
   const updateQty = (action, id) => {
     if (action === "add") {
-      setChangeQty(prev => prev + 1)
       dispatch({ type: actionType.INCREASE_QUANTITY, id })
+      setChangeQty(prev => prev + 1)
     } else {
-      setChangeQty(prev => prev - 1)
       dispatch({ type: actionType.DECREASE_QUANTITY, id })
+      setChangeQty(prev => prev - 1)
     }
   }
 
