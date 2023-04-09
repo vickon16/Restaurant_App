@@ -23,6 +23,7 @@ const useStorageHook = () => {
   const [alertStatus, setAlertStatus] = useState("danger");
   const [msg, setMsg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
   const imageURL = items.imageURL;
 
@@ -57,7 +58,7 @@ const useStorageHook = () => {
         (snap) => {
           const progress = (snap.bytesTransferred / snap.totalBytes) * 100;
           if (snap.state === "running") {
-            console.log("Running:" + progress);
+            setProgress(progress);
           }
         },
         (err) => {
@@ -68,6 +69,7 @@ const useStorageHook = () => {
             setItems((prev) => ({ ...prev, imageURL: downloadURL }));
             setIsLoading(false);
             errSuccessHandle("Image uploaded successfully!!!.", "success");
+            setProgress(0);
           });
         }
       );
@@ -131,6 +133,7 @@ const useStorageHook = () => {
     uploadImage,
     deleteImage,
     saveDetails,
+    progress,
   };
 };
 

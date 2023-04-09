@@ -27,6 +27,7 @@ const CreateContainer = () => {
     msg,
     uploadImage,
     saveDetails,
+    progress,
   } = useStorageHook();
 
   return (
@@ -161,7 +162,8 @@ const CreateContainer = () => {
           </article>
         </div>
 
-        <div className="flex items-center w-full">
+        <div className="flex items-center justify-between w-full gap-3 flex-wrap">
+          {progress > 0 && <p className="text-lg text-emerald-500">Upload Progress : {progress.toFixed(0)}%</p>}
           <button
             type="button"
             className="md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold"

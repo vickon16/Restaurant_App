@@ -4,15 +4,15 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { collection, getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: "restaurant-app-9baf1.firebaseapp.com",
-  databaseURL: "https://restaurant-app-9baf1-default-rtdb.firebaseio.com",
-  projectId: "restaurant-app-9baf1",
-  storageBucket: "restaurant-app-9baf1.appspot.com",
-  messagingSenderId: "564819295288",
-  appId: "1:564819295288:web:133049c823ba328956facd",
+  authDomain: "restaurantapp-7cfb6.firebaseapp.com",
+  projectId: "restaurantapp-7cfb6",
+  storageBucket: "restaurantapp-7cfb6.appspot.com",
+  messagingSenderId: "426676096299",
+  appId: "1:426676096299:web:396c098619d810c25d496e"
 };
 
 // Initialize Firebase
