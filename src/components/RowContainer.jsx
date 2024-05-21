@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { deleteFoodItem, saveCartItem } from "../firebaseFunctions";
 
 const RowContainer = ({ flag, data, rowContainer, admin, dispatch }) => {
-
   return (
     <section
       ref={rowContainer}
@@ -15,7 +14,7 @@ const RowContainer = ({ flag, data, rowContainer, admin, dispatch }) => {
       }`}
     >
       {/* Card */}
-      {(data && data.length > 0) ?
+      {data && data.length > 0 ? (
         data.map((foodItem) => (
           <article
             key={foodItem?.id}
@@ -27,7 +26,13 @@ const RowContainer = ({ flag, data, rowContainer, admin, dispatch }) => {
           >
             {/* Card image Zone */}
             <div className="w-full max-h-[110px] mb-5 flex items-center justify-around">
-              <aside className={`${flag ? "w-32 h-32 md:h-40 md:w-40" : "w-20 h-20 md:h-28 md:w-28"}`}>
+              <aside
+                className={`${
+                  flag
+                    ? "w-32 h-32 md:h-40 md:w-40"
+                    : "w-20 h-20 md:h-28 md:w-28"
+                }`}
+              >
                 <motion.img
                   whileHover={{ scale: 1.1 }}
                   src={foodItem?.imageURL}
@@ -77,12 +82,15 @@ const RowContainer = ({ flag, data, rowContainer, admin, dispatch }) => {
               </div>
             </div>
           </article>
-        )) :
+        ))
+      ) : (
         <div className="w-full flex flex-col gap-3 items-center justify-center">
           <img src="images/NotFound.svg" className="h-225" alt="not-found" />
-          <p className="text-lg text-headingColor font-semibold">...Items Not Available...</p>
+          <p className="text-lg text-headingColor font-semibold">
+            {!flag ? "Items is Unavailable" : "...Sign In to View Items..."}
+          </p>
         </div>
-      }
+      )}
     </section>
   );
 };

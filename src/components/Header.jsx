@@ -12,27 +12,34 @@ const Header = () => {
   const [isMenu, setIsMenu] = useState(false);
 
   // multiple styles
-  const linkStyle = "text-base text-textColor hover:text-headingColor cursor-pointer duration-100 transition-all ease-in-out"
-  const dropdownStyle = "px-2 py-2 flex items-center gap-2 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
+  const linkStyle =
+    "text-base text-textColor hover:text-headingColor cursor-pointer duration-100 transition-all ease-in-out";
+  const dropdownStyle =
+    "px-2 py-2 flex items-center gap-2 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base";
 
   const Login = () => {
     if (!user) {
       signInWithPopup(auth, provider)
         .then((resp) => {
-          const { user: { providerData }} = resp;
-          dispatch({ type: actionType.SET_USER, user: providerData[0]});
-        }).catch((err) => console.log(err));
+          const {
+            user: { providerData },
+          } = resp;
+          dispatch({ type: actionType.SET_USER, user: providerData[0] });
+        })
+        .catch((err) => console.log(err));
     } else {
-      setIsMenu(prev => !prev);
+      setIsMenu((prev) => !prev);
     }
   };
 
   const logout = () => {
-    setIsMenu(false)
-    signOut(auth).then(() => {
-      console.log("logged out successfully")
-    }).catch(err => console.log(err))
-  }
+    setIsMenu(false);
+    signOut(auth)
+      .then(() => {
+        console.log("logged out successfully");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <header className="fixed z-30 w-full p-5 px-4 md:px-12 bg-primary">
@@ -44,7 +51,6 @@ const Header = () => {
         </Link>
 
         <article className="flex item-center gap-6">
-          {/* LISTs for Desktop */}
           <motion.ul
             initial={{ opacity: 0, x: 200 }}
             animate={{ opacity: 1, x: 0 }}
@@ -56,30 +62,41 @@ const Header = () => {
                 Home
               </li>
             </Link>
-            <li className={linkStyle} onClick={() => setIsMenu(false)}>
-              Menu
-            </li>
-            <li className={linkStyle} onClick={() => setIsMenu(false)}>
-              About Us
-            </li>
-            <li className={linkStyle} onClick={() => setIsMenu(false)}>
-              Services
-            </li>
+            <Link to="/about">
+              <li className={linkStyle} onClick={() => setIsMenu(false)}>
+                About us
+              </li>
+            </Link>
+            <Link to="/">
+              <li className={linkStyle} onClick={() => setIsMenu(false)}>
+                Menu
+              </li>
+            </Link>
+            <Link to="/services">
+              <li className={linkStyle} onClick={() => setIsMenu(false)}>
+                Services
+              </li>
+            </Link>
           </motion.ul>
 
           {/* CART Icon */}
           <motion.div
             whileTap={{ scale: 0.8 }}
             className="relative cursor-pointer flex items-center "
-            onClick={() => dispatch({type : actionType.SET_CART_SHOW , cartShow : !cartShow})}
+            onClick={() =>
+              dispatch({ type: actionType.SET_CART_SHOW, cartShow: !cartShow })
+            }
           >
             <MdShoppingBasket className="text-textColor text-2xl" />
             {cartItems && cartItems.length > 0 && (
               <div className="w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center absolute -top-1 -right-2">
-                <p className="text-xs text-white font-semibold">{cartItems.length}</p>
+                <p className="text-xs text-white font-semibold">
+                  {cartItems.length}
+                </p>
               </div>
             )}
           </motion.div>
+
           {/* Avatar */}
           <motion.div
             whileTap={{ scale: 0.9 }}
@@ -104,7 +121,8 @@ const Header = () => {
                       to="/create-item"
                       className={dropdownStyle}
                       onClick={() => setIsMenu(false)}
-                    >New Item <MdAdd />
+                    >
+                      New Item <MdAdd />
                     </Link>
                   </li>
                 )}
@@ -115,35 +133,36 @@ const Header = () => {
                     to="/"
                     className={dropdownStyle}
                     onClick={() => setIsMenu(false)}
-                  >Menu
+                  >
+                    Menu
                   </Link>
                   <Link
                     to="/"
                     className={dropdownStyle}
                     onClick={() => setIsMenu(false)}
-                  >About Us
+                  >
+                    About Us
                   </Link>
                   <Link
                     to="/"
                     className={dropdownStyle}
                     onClick={() => setIsMenu(false)}
-                  >Home
+                  >
+                    Home
                   </Link>
                   <Link
                     to="/"
                     className={dropdownStyle}
                     onClick={() => setIsMenu(false)}
-                  >Services
+                  >
+                    Services
                   </Link>
                 </li>
 
                 <li>
-                  <Link
-                    to="/create-item"
-                    onClick={logout}
-                    className={dropdownStyle}
-                  >Logout <MdLogout />
-                  </Link>
+                  <div onClick={logout} className={dropdownStyle}>
+                    Logout <MdLogout />
+                  </div>
                 </li>
               </motion.ul>
             )}

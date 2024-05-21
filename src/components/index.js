@@ -7,3 +7,5 @@ export { default as CategorySection } from "./CategorySection";
 export { default as RowContainer } from "./RowContainer";
 export { default as MenuSection } from "./MenuSection";
 export { default as CartContainer } from "./CartContainer";
+export { default as AboutSection } from "./AboutSection";
+export { default as ServicesSection } from "./ServicesSection.jsx";

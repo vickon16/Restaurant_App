@@ -1,12 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Route, Routes } from "react-router-dom";
-import { CreateContainer, Header, MainContainer } from "./components";
+import {
+  AboutSection,
+  CreateContainer,
+  Header,
+  MainContainer,
+  ServicesSection,
+} from "./components";
 import { AnimatePresence } from "framer-motion";
 import useInitialLoadData from "./hooks/useInitialLoadData";
 
 function App() {
   // loads all app data
-  useInitialLoadData()
+  useInitialLoadData();
 
   return (
     <AnimatePresence mode="wait">
@@ -16,6 +22,8 @@ function App() {
         <main className="mt-24 px-4 md:px-12 py-4 w-full max-w-[1600px] m-auto my-0">
           <Routes>
             <Route path="/*" element={<MainContainer />} />
+            <Route path="/about" element={<AboutSection />} />
+            <Route path="/services" element={<ServicesSection />} />
             <Route path="/create-item" element={<CreateContainer />} />
           </Routes>
         </main>

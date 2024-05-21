@@ -50,5 +50,4 @@ const useInitialLoadData = () => {
   }, []);
 };
 
-
 export default useInitialLoadData;

@@ -1,10 +1,12 @@
-import React from 'react'
-import {heroData} from "../data";
-
+import React from "react";
+import { heroData } from "../data";
 
 const HomeContainer = () => {
   return (
-    <section id="home" className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full mb-12">
+    <section
+      id="home"
+      className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full mb-12"
+    >
       <article className="py-2 px-1 flex-1 flex flex-col items-start justify-center gap-6">
         {/* Buttons */}
         <div className="flex items-center gap-1 justify-center bg-orange-200 p-2 rounded-full">
@@ -27,10 +29,12 @@ const HomeContainer = () => {
           </span>
         </p>
         <p className="text-base text-textColor text-center sm:text-left md:w-[85%]">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore,
-          adipisci ipsa labore explicabo molestias dicta optio voluptatem sed
-          autem incidunt? Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Excepturi, officiis.
+          We understand the importance of time. That's why we are committed to
+          providing you with the quickest delivery service in town. Whether it's
+          groceries, essentials, or your favorite meals, we've got you covered
+          with lightning-fast speed and exceptional reliability. Say goodbye to
+          long wait times and hello to convenience. Trust us to deliver what you
+          need, when you need it.
         </p>
         <button className="bg-gradient-to-br from-orange-400 to-orange-500 w-full md:w-auto px-4 py-2 rounded-md hover:opacity-90 transition-all ease-in-out duration-200 text-white">
           Order Now
@@ -70,6 +74,6 @@ const HomeContainer = () => {
       </article>
     </section>
   );
-}
+};
 
-export default HomeContainer
+export default HomeContainer;
