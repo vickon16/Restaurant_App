@@ -16,7 +16,7 @@ const useInitialLoadData = () => {
         dispatch({ type: actionType.SET_USER, user: null });
         return;
       }
-      dispatch({ type: actionType.SET_USER, user });
+      return dispatch({ type: actionType.SET_USER, user });
     });
     return () => unSub();
   }, []);
@@ -30,7 +30,7 @@ const useInitialLoadData = () => {
         ...doc.data(),
         id: doc.id,
       }));
-      dispatch({ type: actionType.SET_FOOD_ITEMS, foodItems: allFood });
+      return dispatch({ type: actionType.SET_FOOD_ITEMS, foodItems: allFood });
     });
     return () => unSub();
   }, []);
@@ -44,7 +44,7 @@ const useInitialLoadData = () => {
         ...doc.data(),
         id: doc.id,
       }));
-      dispatch({ type: actionType.SET_CART_ITEMS, cartItems });
+      return dispatch({ type: actionType.SET_CART_ITEMS, cartItems });
     });
     return () => unSub();
   }, []);
