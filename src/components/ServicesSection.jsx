@@ -1,5 +1,4 @@
 import React from "react";
-import { heroData } from "../data";
 
 const ServicesSection = () => {
   return (
